@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenjf.mapper.GtableMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chenjf.entity.Gtable">
+        <id column="gtid" property="gtid" />
+        <result column="tablename" property="tablename" />
+        <result column="chinesename" property="chinesename" />
+        <result column="issql" property="issql" />
+        <result column="isexcel" property="isexcel" />
+        <result column="isincludefield" property="isincludefield" />
+        <result column="generatecount" property="generatecount" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        gtid, tablename,chinesename, issql, isexcel, isincludefield, generatecount
+    </sql>
+	<!-- 生成数据表分页查询 -->
+	<select id="tablelist" parameterType="String" resultType="com.chenjf.entity.Gtable">
+		select 
+		<include refid="Base_Column_List"></include>
+		from gtable t
+		<where>
+		<if test="tablename!=null and tablename!=''">
+			and tablename like '%'||#{tablename}||'%'
+		</if>
+		</where>
+	</select>
+	<!-- 生成数据表详情 -->
+	<select id="getTableByGtid" parameterType="int" resultType="com.chenjf.entity.Gtable">
+		select 
+		<include refid="Base_Column_List"></include>
+		from gtable t
+		<where>
+		 	gtid=#{gtid}
+		</where>
+	</select>
+</mapper>

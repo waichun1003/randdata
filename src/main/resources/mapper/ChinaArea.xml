@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenjf.mapper.ChinaAreaMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chenjf.entity.ChinaArea">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="areaname" property="areaname" />
+        <result column="htmlpath" property="htmlpath" />
+        <result column="areapath" property="areapath" />
+        <result column="arealevel" property="arealevel" />
+        <result column="areanum" property="areanum" />
+        <result column="isleaf" property="isleaf" />
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, pid,areaname, htmlpath, areapath, arealevel, areanum, isleaf
+    </sql>
+	<!-- 生成数据表详情 -->
+	<select id="getAreaByNum" parameterType="int" resultType="com.chenjf.entity.ChinaArea">
+		select 
+		<include refid="Base_Column_List"></include>
+		from china_area 
+		<where>
+		 	arealevel=#{arealevel} and areanum=#{areanum}
+		</where>
+	</select>
+</mapper>

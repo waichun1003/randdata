@@ -1,0 +1,6 @@
+zh:
+  faker:
+    internet:
+      free_email: [gmail.com, yahoo.com, hotmail.com]
+      safe_email: [example.com]
+      domain_suffix: [com, biz, info, name, net, org, io, co]

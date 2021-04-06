@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenjf.mapper.GcolumnMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.chenjf.entity.Gcolumn">
+        <id column="gcid" property="gcid" />
+        <result column="columnname" property="columnname" />
+        <result column="gtid" property="gtid" />
+        <result column="datatype" property="datatype" />
+        <result column="datalength" property="datalength" />
+        <result column="gtid" property="gtid" />
+        <result column="chinesename" property="chinesename" />
+        <result column="params" property="params" />
+        <result column="funcname" property="funcname" />
+        <result column="paratype" property="paratype" />
+        <result column="temp" property="temp" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        gcid, columnname, gtid,datatype,datalength,chinesename, funcname, params,paratype,temp
+    </sql>
+	<!-- 按表id获取全部数据列 -->
+	<select id="getColumnByGtid" parameterType="int" resultType="com.chenjf.entity.Gcolumn">
+		select 
+		<include refid="Base_Column_List"></include>
+		from gcolumn t
+		<where>
+		 	gtid=#{gtid} 
+		</where>
+	</select>
+	<!-- 按表id获取生成数据列详情 -->
+	<select id="getColumnToRand" parameterType="int" resultType="com.chenjf.entity.Gcolumn">
+		select 
+		<include refid="Base_Column_List"></include>
+		from gcolumn t
+		<where>
+		 	gtid=#{gtid} and (funcname is not null or params is not null)
+		</where>
+	</select>
+	<!-- 表id的已设计列数量 -->
+	<select id="columnNum" parameterType="int" resultType="Integer">
+		select count(1) num from gcolumn c where c.gtid=#{gtid} and (c.funcname is not null or c.params is not null)
+	</select>
+</mapper>

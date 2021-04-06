@@ -1,0 +1,5 @@
+zh:
+  faker:
+    phone_number:
+      formats: ['0##-########', '0###-########']
+
